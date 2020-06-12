@@ -1,0 +1,30 @@
+<%- include('../includes/head.ejs')%>
+<link rel="stylesheet" href="/css/user.css">
+</head>
+<body>
+    <%- include('../includes/navigation.ejs')%>
+    <main>
+        <form action="/admin/<% if(editMode){%>edit-product<%}else {%>add-product<%}%>" method="post" class="product-form">
+            <div class="form-control">
+                <label for="title">Name</label>
+                <input type="text" name="title" id="title" value="<%if(editMode){%><%= product.title%><%}%>">
+            </div>
+            <div class="form-control">
+                <label for="imageUrl">Image Url</label>
+                <input type="text" name="imageUrl" id="imageUrl" value="<%if(editMode){%><%= product.imageUrl%><%}%>">
+            </div>
+            <div class="form-control">
+                <label for="desc">Description</label>
+                <textarea name="description" id="desc" rows="5"><%if(editMode){%><%= product.description%><%}%></textarea>
+            </div>
+            <div class="form-control">
+                <label for="price">Price</label>
+                <input type="number" name="price" id="price" step="0.01" value="<%if(editMode){%><%= product.price%><%}%>">
+            </div>
+            <%if(editMode){%>
+                <input type="hidden" value="<%= product._id%>" name="productId">
+            <%}%>
+        <button type="submit" class="submit-btn"><% if(editMode) {%>Update Product <%} else {%>Add Product <%}%></button>
+        </form>
+    </main>
+</body>
